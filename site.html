@@ -1,0 +1,564 @@
+<script src="assets/draganddrop.js"></script>
+
+<section id="site">
+
+	<div class="header-app rose white-text">
+
+		<div></div>
+
+		<div>Site</div>
+
+		<div><span class="icon-quiz"></span></div>
+
+	</div>
+
+	<section id="pagina1" class="pag">	
+
+		<h2>Vamos construir juntas o site da Minidev?</h2>
+
+		<div class="site">
+
+			<div><img width="60" src="assets/img/logo-peq.png" alt="logo"></div>
+
+			<div class="hidden-block h1"></div>
+
+			<div class="hidden-block h2"></div>
+
+			<div class="sides">
+
+				<div class="stripes"></div>
+
+				<div class="img piecezone" id="dropzone1"><img src="assets/img/avatar/minidev-fundo-transparente.png" /></div>
+
+			</div>
+
+			<div class="footer">
+
+				<div class="hidden-block icon piecezone"><img src="assets/img/icones/tiktok.png" width="100%"></div>
+
+				<div class="hidden-block icon piecezone"><img src="assets/img/icones/instagram.png" width="100%"></div>
+
+				<div class="hidden-block icon piecezone"><img src="assets/img/icones/whatsapp.png" width="100%"></div>
+
+			</div>
+
+		</div>
+
+	</section>
+
+	<div class="footerpainel exer1">
+
+		<h2>Junte as peças e forme o título</h2>
+
+		<div class="options-wrap">
+
+			<a href="#" data-resposta="1">é o</a>
+
+			<a href="#" data-resposta="0">Este</a>
+
+			<a href="#" data-resposta="2">site</a>
+
+			<a href="#" data-resposta="3">da Minidev</a>
+
+		</div>
+
+	</div>
+
+	<div class="footerpainel exer2">
+
+		<h2>Junte as peças de novo e forme o subtítulo</h2>
+
+		<div class="options-wrap">
+
+			<a href="#" data-resposta="2"> a </a>
+
+			<a href="#" data-resposta="1">sobre</a>
+
+			<a href="#" data-resposta="3">tecnologia</a>
+
+			<a href="#" data-resposta="0">Tudo</a>
+
+		</div>
+
+	</div>
+
+	<div class="footerpainel exer3">
+
+		<h2>Escolha a Minidev certa<br />
+
+			<small>e arraste para a parte cinza</small>
+
+		</h2>
+
+		
+
+		<div class="images-wrap">
+
+			<img class="dragdrop" src="assets/img/avatar/amiga.png" data-dropzone="dropzone3" />
+
+			<img class="dragdrop" src="assets/img/avatar/mascote.png" data-dropzone="dropzone2" />
+
+			<img class="dragdrop" src="assets/img/avatar/minidev.png" data-dropzone="dropzone1" />
+
+		</div>
+
+	</div>
+
+	<div class="footerpainel exer4">
+
+		<h2>Escolha uma cor para o cabelo</h2>
+
+		<div class="colorpicker">
+
+			<span class="picker" style="left: -500px"></span>
+
+		</div>
+
+		<button class="btna">Escolher</button>
+
+	</div>
+
+	<div class="footerpainel exer5">
+		<h2>Arraste as animações em cada rede social</h2>
+		<div class="images-wrap">
+			<div class="dragdrop" data-efeito="jump"><span></span></div>
+			<div class="dragdrop" data-efeito="shake"><span></span></div>
+			<div class="dragdrop" data-efeito="fade"><span></span></div>
+		</div>
+		<a class="btna" href="#">Finalizar</a>
+	</div>
+	<div class="painelResposta"><button class="btna">Continuar</button></div>
+
+
+
+</section>
+
+<script>
+
+var exer = '';
+var acertou = new Audio('assets/sound/acertou.wav');
+var errou = new Audio('assets/sound/errou.wav');
+var peca = new Audio('assets/sound/peca.wav');
+
+
+$(function() {
+
+	var queryString = window.location.search;
+
+	urlParams = new URLSearchParams(queryString);
+
+	if (urlParams.has('step')) {
+
+		switch (urlParams.get('step')) {
+
+			case '2':
+				setTimeout(initExer3,1000);
+			break;
+
+			case '3':
+				setTimeout(initExer5,1000);
+			break;
+		}
+
+	} else{
+		setTimeout(initExer1,1000);
+	}
+
+	$('.painelResposta button').click(function (e) {
+
+		e.preventDefault();
+
+		$('.painelResposta').removeClass('certo');
+
+		switch (exer) {
+
+			case 'exer1':
+
+				setTimeout(function(){	initExer2();},600);
+
+			break;
+
+			case 'exer2':
+
+				setTimeout(function(){	initExer3();},600);
+
+			break;
+
+			case 'exer3':
+
+				setTimeout(function(){	initExer4();},600);
+
+			break;
+
+			case 'exer4':
+
+				setTimeout(function(){	initExer5();},600);
+
+			break;
+
+			case 'exer5':
+				Classmenu.setStep(80);
+				Classmenu.closeWindow();
+				setTimeout(function () {
+  					Classmenu.doStep();
+				});
+
+			break;
+
+		}
+
+	});
+
+});
+
+
+
+function initExer1(){
+
+	exer = 'exer1';
+
+	$('.footerpainel.exer1').addClass('ativo');	
+
+	$('.site').addClass('zoom');
+
+	$('.hidden-block.h1').html('&lt;h1&gt;<span>Este é o site da Minidev</span>&lt;/h1&gt;');
+
+	var seq = -1;
+
+	$('.exer1 .options-wrap a').click(function (e) {
+
+		e.preventDefault();
+
+		var id = $(this).attr('data-resposta');
+
+		if ( (id-1) ==  seq) {
+
+			var playPromise = peca.play();
+
+			seq = id;
+
+			var texto = $(this).html();
+
+			var html = $('.hidden-block.h1').html().replace(texto,"<span>"+texto+"</span>");
+
+			$('.hidden-block.h1').html(html);
+
+			if (seq == 3) {
+
+				$('.footerpainel.exer1').removeClass('ativo');
+
+				setTimeout(function(){
+
+					$('.painelResposta').addClass('certo');
+
+					var playPromise = acertou.play();
+
+				},600);
+
+			}
+
+		} else {
+
+			$(this).shake(100,10,3);
+
+			var playPromise = errou.play(); 
+
+		}
+
+	});
+
+}
+
+function initExer2(){
+
+	exer = 'exer2';
+
+	$('.footerpainel.exer2').addClass('ativo');
+
+	$('.site').addClass('zoom2x');
+
+	$('.hidden-block.h2').html('&lt;h2&gt;<span>Tudo sobre a tecnologia</span>&lt;/h2&gt;');
+
+	var seq = -1;
+
+	$('.exer2 .options-wrap a').click(function (e) {
+
+		e.preventDefault();
+
+		var id = $(this).attr('data-resposta');
+
+		if ( (id-1) ==  seq) {
+
+			var playPromise = peca.play();
+
+			seq = id;
+
+			var texto = $(this).html();
+
+			var html = $('.hidden-block.h2').html().replace(texto,"<span>"+texto+"</span>");
+
+			$('.hidden-block.h2').html(html);
+
+			if (seq == 3) {
+
+				$('.footerpainel.exer2').removeClass('ativo');
+
+				setTimeout(function(){
+
+					$('.painelResposta').addClass('certo');
+
+					var playPromise = acertou.play();
+
+				},600);
+
+			}
+
+		} else {
+
+			$(this).shake(100,10,3);
+
+			var playPromise = errou.play(); 
+
+		}
+
+	});
+
+}
+
+function initExer3(){
+
+	exer = 'exer3';
+
+	$('.hidden-block.h1').html('&lt;h1&gt;<span><span>Este é o site da Minidev</span></span>&lt;/h1&gt;');
+
+	$('.hidden-block.h2').html('&lt;h2&gt;<span><span>Tudo sobre a tecnologia</span></span>&lt;/h2&gt;');
+
+	$('.site').addClass('zoom zoom3x');
+
+	$('.footerpainel.exer3').addClass('ativo');
+
+	$('.footerpainel.exer3 .dragdrop').draggable({
+
+		revert: true,
+
+		placeholder: true,
+
+		droptarget:  '.piecezone',
+
+		drop: function(evt, droptarget) {
+
+			var pos = $(this).attr('data-dropzone');
+
+			if (pos == $(droptarget).attr('id')) {
+
+				var playPromise = peca.play();
+
+		  		$(droptarget).addClass('ativo');
+
+		  		$('.footerpainel.exer3').removeClass('ativo');
+
+				setTimeout(function(){
+
+					$('.painelResposta').addClass('certo');
+
+					var playPromise = acertou.play();
+
+				},600);
+
+				return;
+
+			} else{
+
+				$(this).shake(100,10,3);
+
+				var playPromise = errou.play();
+
+			}
+
+		}
+
+	});
+
+}
+
+function initExer4(){
+
+	exer = 'exer4';
+
+	$('.footerpainel.exer4').addClass('ativo');
+
+	$('.colorpicker').click(function (e) {
+
+		e.preventDefault();
+
+		var rect = e.target.getBoundingClientRect();
+
+		var x = e.clientX - rect.left;
+
+		var y = e.clientY - rect.top;
+
+		var xPercent = (x*100)/rect.width;
+
+		$('.picker').css('left',(x-16.5),);
+
+		$('.picker').css('top',(y-16.5));
+
+		var gradient = [
+
+			 [0,[255,0,0]],
+
+			 [16.66,[255,255,0]],
+
+			 [33.33,[0,255,0]],
+
+			 [50,[0,255,255]],
+
+			 [66.66,[0,0,255]],
+
+			 [83.33,[255,0,255]],
+
+			 [100,[0,0,0]]
+
+		];
+
+		var colorRange = []
+
+		$.each(gradient, function( index, value ) {
+
+		   if(xPercent<=value[0]) {
+
+		       colorRange = [index-1,index]
+
+		       return false;
+
+		   }
+
+		});
+
+
+
+		var firstcolor = gradient[colorRange[0]][1];
+
+      var secondcolor = gradient[colorRange[1]][1];
+
+
+
+      sliderWidth = $('.colorpicker').width() ;
+
+		var firstcolor_x = sliderWidth*(gradient[colorRange[0]][0]/100);
+
+		var secondcolor_x = sliderWidth*(gradient[colorRange[1]][0]/100)-firstcolor_x;
+
+		var slider_x = sliderWidth*(xPercent/100)-firstcolor_x;
+
+		var ratio = slider_x/secondcolor_x;
+
+
+
+		var result = pickHex( secondcolor,firstcolor, ratio );                       
+
+      $('.img').css("background-color", 'rgb('+result.join()+')');
+
+      window.localStorage.setItem('corminideve', result.join());
+
+
+
+	});
+
+	$('.footerpainel.exer4 .btna').click(function (e) {
+
+		e.preventDefault();
+
+		$('.footerpainel.exer4').removeClass('ativo');
+
+			setTimeout(function(){
+
+				$('.painelResposta').addClass('certo');
+
+				var playPromise = acertou.play();
+
+			},600);
+
+	});
+
+}
+
+function initExer5(){
+
+	exer = 'exer5';
+
+	var corminideve = window.localStorage.getItem('corminideve');
+
+	$('.img').css("background-color", 'rgb('+corminideve+')');
+
+
+
+	$('.hidden-block.h1').html('&lt;h1&gt;<span><span>Este é o site da Minidev</span></span>&lt;/h1&gt;');
+
+	$('.hidden-block.h2').html('&lt;h2&gt;<span><span>Tudo sobre a tecnologia</span></span>&lt;/h2&gt;');
+
+	$('.img.piecezone').addClass('ativo');
+
+	$('.site').addClass('zoom zoom4x');
+
+	$('.footerpainel.exer5').addClass('ativo');
+
+	$('.footerpainel.exer5 .dragdrop').draggable({
+
+		revert: true,
+
+		placeholder: true,
+
+		droptarget:  '.footer .piecezone',
+
+		drop: function(evt, droptarget) {
+
+			var efeito = $(this).attr('data-efeito');
+
+			switch (efeito) {
+				case 'jump':
+					$(droptarget).jump(500,10,999);
+				break;
+
+				case 'shake':
+					$(droptarget).shake(200,5,999);
+				break;
+				case 'fade':
+					$(droptarget).fadeInOut(1000,999);
+
+				break;
+
+			}
+
+		}
+
+	});
+
+	$('.footerpainel.exer5 .dragdrop span').eq(0).jump(500,10,999);
+	$('.footerpainel.exer5 .dragdrop span').eq(1).shake(500,5,999);
+	$('.footerpainel.exer5 .dragdrop span').eq(2).fadeInOut(1000,999);
+	$('.footerpainel.exer5 .btna').click(function (e) {
+		e.preventDefault();
+		$('.footerpainel.exer5').removeClass('ativo');
+			setTimeout(function(){
+				$('.painelResposta').addClass('certo');
+				var playPromise = acertou.play();
+
+			},600);
+	});
+
+}
+
+function pickHex(color1, color2, weight) {
+
+    var p = weight;
+    var w = p * 2 - 1;
+    var w1 = (w/1+1) / 2;
+    var w2 = 1 - w1;
+    var rgb = [Math.round(color1[0] * w1 + color2[0] * w2),
+        Math.round(color1[1] * w1 + color2[1] * w2),
+        Math.round(color1[2] * w1 + color2[2] * w2)];
+    return rgb;
+
+}
+</script>

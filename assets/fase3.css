@@ -1,0 +1,203 @@
+#site{
+  background-color: #FFF;
+  height: 100vh;
+  overflow: hidden;
+}
+
+#site .pag{
+	margin: 0 auto;
+	width: 90%;
+}
+#site .pag h2{
+	margin: 5vh 0; 
+	font-weight: bold;
+	font-size: 24px;
+	color: #797979;
+}
+#site .site{
+	padding: 16px;
+	transition: transform .5s cubic-bezier(0.25, 0.1, 0.49, 1.61), margin .5s cubic-bezier(0.25, 0.1, 0.49, 1.61);
+	border-radius: 10px;
+	background: #F5F2FA;
+}
+#site .site.zoom{
+	margin-top: 15vh;
+	transform: scale(1.1);
+}
+#site .site.zoom2x{
+	margin-top: 5vh;
+	transform: scale(1.2);
+}
+#site .site.zoom3x{
+	margin-top: -5vh;
+	transform: scale(1.2);
+    margin-left: -25vw;
+    margin-right: 25vw;
+}
+#site .site.zoom4x{
+	margin-top: -22vh;
+    transform: scale(1.1);
+    margin-left: -24vw;
+    margin-right: 24vw;
+}
+#site .hidden-block{
+	display: block;
+	min-height: 1px;
+	line-height: 100%;
+	background: #E7E4EC;
+}
+#site .hidden-block.h1{
+	height: 26px;
+	margin: 5px 0;
+	color: #000000;
+	font-style: normal;
+	font-weight: bold;
+	font-size: 12px;
+}
+#site .hidden-block.h1 span, .hidden-block.h2 span{
+	font-style: normal;
+	font-weight: 900;
+	font-size: 18px;
+	line-height: 27px;
+	color: #D8D1E3;
+}
+#site .hidden-block span span{
+	color: #BD74DF !important;
+}
+#site .hidden-block.h2{
+	height: 19px;
+	width: 70%;
+	margin: 5px 0;
+	color: #000000;
+	font-style: normal;
+	font-weight: bold;
+	font-size: 10px;
+}
+#site .hidden-block.h2 span{
+	font-size: 12px;
+	line-height: 25px;
+}
+#site .sides{
+	margin: 16px 0;
+}
+#site .sides:after{
+	content: ' ';
+	display: block;
+	clear: both;
+	height: 1px;;
+}
+#site .sides > div{
+	width: 48%;
+	min-height: 1px;
+}
+#site .sides > div:after {
+  content: "";
+  display: block;
+  padding-bottom: 100%;
+}
+#site .stripes{
+	float: left;
+	background: linear-gradient(
+		to bottom,
+    	#E7E4EC,
+    	#E7E4EC 90%,
+    	#F5F2FA 10%,
+    	#F5F2FA
+	);
+	background-size: 100% 14.4px;
+}
+#site .img{
+	position: relative;
+	float: right;
+	background-image: url('img/round.png');
+	background-repeat: no-repeat;
+	background-position: center;
+	background-color: #E7E4EC;
+}
+
+#site .img img{ position: absolute; display: none; width: 100%; }
+#site .img.ativo { background-color: black; background-image: none; }
+#site .img.ativo img{ display: block; }
+#site .footer:after{
+	content: ' ';
+	display: block;
+	clear: both;
+	height: 1px;;
+}
+#site .footer .icon{
+	float: right;
+	width: 30px;
+	height: 30px;
+	margin: 0 5px;
+}
+#site .footerpainel{
+	position: absolute;
+	height: 30vh;
+	left: 0; right: 0;
+	bottom: 0vh;
+	transform: translateY(105%);
+	padding: 14px 20px;
+	background-color: #FFF;
+	box-shadow: -1px -5px 15px -7px #000000;
+	transition: all 0.5s cubic-bezier(0.25, 0.1, 0.49, 1.61);
+}
+#site .footerpainel.ativo{
+	transform: translateY(0%);
+}
+#site .footerpainel h2{
+	font-family: Nunito;
+	font-style: normal;
+	font-weight: bold;
+	font-size: min(5vw,24px);
+	line-height: min(5vw,24px);
+	color: #797979;
+}
+#site .options-wrap{
+    display: grid;
+    grid-auto-flow: column;
+    grid-gap: 20px;
+    grid-template-rows: auto auto;
+    grid-template-columns: 45%;
+}
+#site .options-wrap a{
+	display: block;
+	text-align: center;
+	background: #E6E6E6;
+	border-radius: 24px;
+	font-weight: bold;
+	font-size: 16px;
+	line-height: 55px;
+	color: #4F4F4F;
+	text-decoration: none;
+}
+#site .images-wrap{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+#site .images-wrap > img{
+	display: block;
+	width: 30vw;
+}
+#site .images-wrap > div > span{
+	display: block;
+	margin: 0 auto;
+	line-height: 10px;
+	width: 15vw;
+	height: 15vw;
+	background-color: #BD74DF;
+	border-radius:  10px;
+}
+#site .footerpainel.exer4 .colorpicker{
+	position: relative;
+	border-radius: 30px;
+	width: 100%;
+	height: 10vh;
+    background: -webkit-linear-gradient(left, #F00 0%, #FF0 16.66%, #0F0 33.33%, #0FF 50%, #00F 66.66%, #F0F 83.33%, #000 100%);
+}
+#site .picker{
+	position: absolute;
+	width: 25px; height: 25px;
+	border: #FFF solid 4px;
+	border-radius: 30px;
+}

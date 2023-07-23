@@ -1,0 +1,159 @@
+<script src="assets/draganddrop.js"></script>
+
+<section id="quiz">
+
+	<div class="header-app laranja white-text">
+
+		<div></div>
+
+		<div>Quebra-cabeça</div>
+
+		<div><span class="icon-wifi"></span></div>
+
+	</div>
+
+	<section id="pagina2" class="pagina ativa">
+
+		<div class="wrap">
+
+			<h2>Monte o quebra-cabeça e descubra o símbolo do Wi-fi!</h2>
+
+			<div class="dropzone">
+
+				<div class="piecezone" id="dropzone1"></div>
+
+				<div class="piecezone" id="dropzone2"></div>
+
+				<div class="piecezone" id="dropzone3"></div>
+
+				<div class="piecezone" id="dropzone4"></div>
+
+				<div class="piecezone" id="dropzone5"></div>
+
+				<div class="piecezone" id="dropzone6"></div>
+
+				<div class="piecezone" id="dropzone7"></div>
+
+				<div class="piecezone" id="dropzone8"></div>
+
+				<div class="piecezone" id="dropzone9"></div>
+
+			</div>
+
+			<div class="draggzone">
+
+				<img class="dragdrop" data-dropzone="dropzone9" src="assets/pecas/piece1-inative.png" alt="">
+
+				<img class="dragdrop" data-dropzone="dropzone2" src="assets/pecas/piece3-inative.png" alt="">	
+
+				<img class="dragdrop" data-dropzone="dropzone4" src="assets/pecas/piece5-inative.png" alt="">	
+
+				<img class="dragdrop" data-dropzone="dropzone1" src="assets/pecas/piece2-inative.png" alt="">	
+
+				<img class="dragdrop" data-dropzone="dropzone6" src="assets/pecas/piece7-inative.png" alt="">	
+
+				<img class="dragdrop" data-dropzone="dropzone5" src="assets/pecas/piece6-inative.png" alt="">	
+
+				<img class="dragdrop" data-dropzone="dropzone8" src="assets/pecas/piece9-inative.png" alt="">	
+
+				<img class="dragdrop" data-dropzone="dropzone3" src="assets/pecas/piece4-inative.png" alt="">
+
+				<img class="dragdrop" data-dropzone="dropzone7" src="assets/pecas/piece8-inative.png" alt="">	
+
+			</div>
+
+		</div>
+
+		<div class="painelResposta"><button class="btna">Voltar para Home</button></div>
+
+	</section>
+
+</section>
+
+</html>
+
+<script>
+
+$(function() {
+
+
+
+	var select = new Audio('assets/sound/select.wav');
+
+	var acertou = new Audio('assets/sound/acertou.wav');
+
+	var errou = new Audio('assets/sound/errou.wav');
+
+	var peca = new Audio('assets/sound/peca.wav');
+
+
+
+	var queryString = window.location.search;
+
+	urlParams = new URLSearchParams(queryString);
+
+	//quebra-cabeça
+
+	$('.dragdrop').draggable({
+
+		revert: true,
+
+		placeholder: true,
+
+		droptarget:  '.piecezone',
+
+		drop: function(evt, droptarget) {
+
+			var pos = $(this).attr('data-dropzone');
+
+			if (pos == $(droptarget).attr('id')) {
+
+				var playPromise = peca.play();
+
+		  		$(droptarget).addClass('ativo');
+
+		    	$(this).remove();
+
+		    	testaFinal();
+
+			}
+
+		}
+
+	});
+
+	function testaFinal(){
+
+    	if ($('.dropzone .ativo').length == 9) {
+
+    		var playPromise = acertou.play();
+
+    		$('.pagina.ativa .painelResposta').addClass('certo');
+
+    	}
+
+	}
+
+	$('#pagina2 .painelResposta .btna').click(function(event) {
+
+		Classmenu.setStep(40);
+
+		Classmenu.closeWindow();
+
+		setTimeout(function () {
+
+      		Classmenu.doStep();
+
+      	}, 1100);
+
+	});
+
+
+
+});
+
+
+
+
+
+</script>

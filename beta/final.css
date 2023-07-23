@@ -1,0 +1,85 @@
+body{
+	position: relative;
+	background: #BD74DF;
+	padding: 0;
+	padding-top: 1px;
+	margin: 0; 
+	position: relative;
+	font-family: 'Nunito', sans-serif;
+	font-size: 16px; 
+}
+.progressbar{
+	position: relative;
+	height: 12px;
+	background-color: #E6E6E6;
+	border-radius: 16px;
+	margin: 0 28px;
+	margin-top: 45px;
+}
+.progressbar span {
+	position: absolute;
+	z-index: 10;
+    top: -5px;
+	left: 25%;
+	display: block;
+	border-radius: 10px;
+	width: 20px;
+	height: 20px;
+	font-size: 10px;
+	color: #AF5DD6;
+	line-height: 2;
+	text-align: center;
+	background: #FFD372;
+}
+.progressbar span:nth-child(2){ left: 50%; }
+.progressbar span:nth-child(3){ left: 75%; }
+.progressbar .progress {
+	position: absolute;
+	z-index: 5;
+	top: 0;
+	left: 0;
+	transition: width 1s ease-in-out;
+	width: 100%;
+	height: 12px;
+	border-radius: 16px;
+	background: #FFD372;
+}
+.boxfinal{
+	position: absolute;
+	background-image: url('assets/final.png');
+	background-repeat: no-repeat;
+	background-size: auto;
+	background-position: center top;
+	width: 100%;
+	height: 395px;
+	margin: 0 auto;
+	bottom: -400px;
+	transition: bottom 1.5s cubic-bezier(0.760, -0.330, 0.340, 1.400);
+}
+.boxfinal p{
+	font-weight: 800;
+	font-size: 18px;
+	text-align: center;
+	color: #9A7CAA;
+	padding: 155px 84px 0 84px;
+	text-align: center;
+}
+.boxfinal.anima{
+	bottom: 20%;
+}
+.btnvamos{
+	opacity: 0;
+	background-image: url('assets/btnvamos.png');
+	background-color: transparent;
+	display: inline-block;
+	border: 0;
+	width: 144px;
+	height: 68px;
+	margin: 14px auto;
+	filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+	transition: opacity .8s linear 2s;
+}
+.anima .btnvamos{
+	opacity: 1;
+
+}

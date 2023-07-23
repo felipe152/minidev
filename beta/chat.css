@@ -1,0 +1,85 @@
+body{
+	background: #82C7CA;
+	padding: 0;
+	margin: 0; 
+	position: relative;
+	font-family: 'Nunito', sans-serif;
+	font-size: 16px; 
+}
+#chatarea{
+	position: absolute;
+	bottom: 105px;
+	width: calc(100% - 50px);
+	margin: 0 25px;
+}
+#chatarea img{
+	opacity: 0;
+	transition: opacity 2s ease-in-out;
+	position: absolute;
+	bottom: 0;
+	left: 0;
+}
+#msgarea{
+	display: inline-block;
+    margin: 0 50px;
+    padding: 0;
+    list-style: none;
+    width: 305px;
+}
+#msgarea li{
+	display: none;
+	background-color: #FFF;
+	width: 66%;
+	margin: 5px 0;
+	padding: 20px;
+	border-radius: 16px;
+	color: #000;
+}
+#msgarea li.msguser{
+	margin-left: 60px;
+	background: #BD74DF;
+	color: #FFF;
+}
+
+#textarea{
+	display: none;
+	opacity: 0;
+	transition: opacity 1s ease-in-out;
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	height: 85px;
+
+}
+#textarea input{
+	display: block;
+	margin: 25px;
+	height: 40px;
+	width: -webkit-fill-available;
+	padding: 5px 20px;
+	border: none;
+	border-radius: 30px;
+	background-color: rgba(255,255,255,0.5);
+}
+#textarea #sendmessage{
+	position: absolute;
+	top: 38px; 
+	right: 32px;
+	width: 24px;
+	height: 24px;
+	background-image: url('assets/img/send.png');
+}
+#btnvamos{
+	display: none;
+	opacity: 0;
+	transition: opacity 1s ease-in-out;
+	position: absolute;
+	bottom: 10px;
+    left: 23px;
+    right: 23px;
+    height: 88px;
+	background-image: url('assets/img/button-vamos.png');
+	background-repeat: no-repeat;
+	background-size: 100%;
+}

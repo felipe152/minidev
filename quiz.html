@@ -1,0 +1,105 @@
+<script src="assets/draganddrop.js"></script>
+<section id="quiz">
+	<div class="header-app verde-limao white-text">
+		<div></div>
+		<div>Quiz</div>
+		<div><span class="icon-check"></span></div>
+	</div>
+	<section id="pagina1" class="pagina ativa">	
+		<div class="quiz ativo">
+			<h2>O que é Internet?</h2>
+			<button class="alternativa btna" data-correta="0">É uma comida deliciosa</button>
+			<button class="alternativa btna" data-correta="1">É uma rede que liga pessoas e computadores</button>
+			<button class="alternativa btna" data-correta="0">É um esporte</button>
+			<button class="validar btna inFooter btnaDisabled">Confirmar 💫</button>
+		</div>
+		<div class="quiz">
+			<h2>Por onde eu acesso a Internet?</h2>
+			<button class="alternativa btna" data-correta="1">Computadores e celulares</button>
+			<button class="alternativa btna" data-correta="0">Cama e Mesa</button>
+			<button class="alternativa btna" data-correta="0">Lápis e Caderno</button>
+			<button class="validar btna inFooter btnaDisabled">Confirmar 💫</button>
+		</div>
+		<div class="quiz">
+			<h2>O que pode fazer na Internet?</h2>
+			<button class="alternativa btna" data-correta="0">Pular corda</button>
+			<button class="alternativa btna" data-correta="0">Comer e Beber</button>
+			<button class="alternativa btna" data-correta="1">Trocar ideias e estudar</button>
+			<button class="validar btna inFooter btnaDisabled">Confirmar 💫</button>
+		</div>
+		<div class="painelResposta"><button class="btna">Continuar</button></div>
+	</section>
+
+
+
+</section>
+</html>
+<script>
+var acertos = 0;
+$(function() {
+
+
+	var select = new Audio('assets/sound/select.wav');
+	var acertou = new Audio('assets/sound/acertou.wav');
+	var errou = new Audio('assets/sound/errou.wav');
+	var peca = new Audio('assets/sound/peca.wav');
+
+	var queryString = window.location.search;
+	urlParams = new URLSearchParams(queryString);
+	
+
+	//quiz
+	$('.quiz > .alternativa').click(function(event) {
+		if ($('.pagina.ativa .quiz.ativo .resposta.certo, .pagina.ativa .quiz.ativo .resposta.errado').length > 0) { return false; }
+		var playPromise = select.play();
+		$('.pagina.ativa .quiz.ativo').find('.alternativa').removeClass('btnaSelect');
+		$(this).addClass('btnaSelect');
+		$('.pagina.ativa .quiz.ativo').find('.validar').removeClass('btnaDisabled');
+	});
+	$('.validar').click(function(event) {
+		if ($('.pagina.ativa .quiz.ativo .alternativa.btnaSelect').length == 0) { return false; }
+		var quiz = $('.pagina.ativa .quiz.ativo');
+		var resp = $(quiz).find('.alternativa.btnaSelect').attr('data-correta');
+		$('.painelResposta').removeClass(['certo','errado']);
+		if (resp=='1') {
+			var playPromise = acertou.play();
+			acertos++;
+			$('.painelResposta').addClass('certo');
+		} else{
+			var playPromise = errou.play();
+			$('.painelResposta').addClass('errado');
+			$(quiz).find(".alternativa[data-correta='1']").addClass('btnaSuccess');
+		}
+		$(quiz).find('.validar').hide();
+			
+	});
+	
+});
+
+function proxQuiz(page = ''){
+	$('.painelResposta').removeClass(['certo','errado']);
+	var currentQuiz = $(page + ' .quiz.ativo').index();
+	if ($(page + ' .quiz').eq(currentQuiz+1).length > 0) {
+		$(page + ' .quiz').eq(currentQuiz).fadeOut( "slow", function() {
+			$(this).removeClass('ativo');
+			$(page + ' .quiz').eq(currentQuiz+1).addClass('ativo')
+		});
+	} else{
+		if(acertos < 2){
+			Classmenu.setStep(22);
+		} else{
+			Classmenu.setStep(30);
+		}
+		
+		Classmenu.closeWindow();
+		setTimeout(function () {
+      		Classmenu.doStep();
+      	}, 1100);
+	}
+}
+$('#pagina1 .painelResposta .btna').click(function(event) {
+	proxQuiz('.pagina.ativa');
+});
+
+
+</script>

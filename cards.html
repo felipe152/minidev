@@ -1,0 +1,203 @@
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<script src="assets/hammer.min.js"></script>
+<section id="tinder">
+	<div class="header-app rose white-text">
+		<div></div>
+		<div>Cards</div>
+		<div><span class="icon-cards"><span class="path1"></span><span class="path2"></span></span></div>
+	</div>
+	<h2>O que podemos fazer na internet?</h2>
+	<div class="tinder">
+		<div class="tinder--status">
+			<i class="fa fa-times"></i>
+			<i class="fa fa-check"></i>
+		</div>
+
+		<div class="tinder--cards">
+			<div class="tinder--card" data-resposta="1">
+				<h3>Ver vídeos</h3>
+				<img src="assets/img/cards/ver-videos.png?f=1">
+			</div>
+			<div class="tinder--card" data-resposta="1">
+				<h3>Estudar</h3>
+				<img src="assets/img/cards/estudar.png?f=1">
+			</div>
+			<div class="tinder--card" data-resposta="0">
+				<h3>Abraçar as Amigas</h3>
+				<img src="assets/img/cards/abracar-amigas.png?f=99000">
+			</div>
+			<div class="tinder--card" data-resposta="1">
+				<h3>Desenvolver Sites</h3>
+				<img src="assets/img/cards/desenvolver-sites.png?f=1">
+			</div>
+			<div class="tinder--card" data-resposta="1">
+				<h3>Jogar Jogos</h3>
+				<img src="assets/img/cards/jogar-jogos.png?f=1">
+			</div>
+			<div class="tinder--card" data-resposta="0">
+				<h3>Tomar Banho</h3>
+				<img src="assets/img/cards/tomar-banho.png?f=1">
+			</div>
+		</div>
+		<div class="tinder--buttons">
+			<button id="nope" class="btna"><i class="fa fa-times"></i></button>
+			<button id="love" class="btna"><i class="fa fa-check"></i></button>
+		</div>
+	</div>
+	<div class="painelResposta"></div>
+</section>
+</html>
+<script>
+
+var acertou = new Audio('assets/sound/acertou.wav');
+var errou = new Audio('assets/sound/errou.wav');
+var queryString = window.location.search;
+var urlParams = new URLSearchParams(queryString);
+
+
+function removeCards(item, index){	
+	if (index>2) {
+		item.remove();
+	}
+}
+
+var tinderContainer = document.querySelector('.tinder');
+var allCards = document.querySelectorAll('.tinder--card');
+var resposta = document.querySelectorAll('.painelResposta')[0];
+var respostaText = document.querySelectorAll('.resposta span')[0];
+var continuar = document.getElementById('continuar');
+var nope = document.getElementById('nope');
+var love = document.getElementById('love');
+var acertos = 0;
+
+function initCards(card, index) {
+  var newCards = document.querySelectorAll('.tinder--card:not(.removed)');
+  newCards.forEach(function (card, index) {
+    card.style.zIndex = allCards.length - index;
+    card.style.transform = 'scale(' + (30 - (index*3)) / 30 + ') translateY(' + 50 * index + 'px)';
+    card.style.opacity = (10 - index) / 10;
+  });
+  
+  tinderContainer.classList.add('loaded');
+  if (newCards.length == 0) {
+  	console.log(acertos);
+  	if(acertos>3){
+  		Classmenu.setStep(60);
+  	} else{
+  		Classmenu.setStep(54);
+  	}
+		Classmenu.closeWindow();
+		setTimeout(function () {
+  		Classmenu.doStep();
+  	}, 1100);
+  }
+}
+
+initCards();
+
+allCards.forEach(function (el) {
+  var hammertime = new Hammer(el);
+
+  hammertime.on('pan', function (event) {
+    el.classList.add('moving');
+  });
+
+  hammertime.on('pan', function (event) {
+    if (event.deltaX === 0) return;
+    if (event.center.x === 0 && event.center.y === 0) return;
+
+    tinderContainer.classList.toggle('tinder_love', event.deltaX > 100);
+    tinderContainer.classList.toggle('tinder_nope', event.deltaX < -100);
+
+    var xMulti = event.deltaX * 0.5;
+    var yMulti = event.deltaY / 80;
+    var rotate = xMulti * yMulti;
+
+    event.target.style.transform = 'translate(' + event.deltaX + 'px, ' + event.deltaY + 'px) rotate(' + rotate + 'deg)';
+  });
+
+  hammertime.on('panend', (event) => {
+    el.classList.remove('moving');
+    var moveOutWidth = document.body.clientWidth;
+    var keep = Math.abs(event.deltaX) < 80 || Math.abs(event.velocityX) < 0.5;
+    event.target.classList.toggle('removed', !keep);
+
+
+    if (keep) {
+      event.target.style.transform = '';
+    } else {
+      var endX = Math.max(Math.abs(event.velocityX) * moveOutWidth, moveOutWidth);
+      var toX = event.deltaX > 0 ? endX : -endX;
+      var endY = Math.abs(event.velocityY) * moveOutWidth;
+      var toY = event.deltaY > 0 ? endY : -endY;
+      var xMulti = event.deltaX * 0.03;
+      var yMulti = event.deltaY / 120;
+      var rotate = xMulti * yMulti;
+      var dataResposta = event.target.attributes['data-resposta'].value;
+
+      event.target.style.transform = 'translate(' + toX + 'px, ' + (toY + event.deltaY) + 'px) rotate(' + rotate + 'deg)';
+
+      if ((event.deltaX > 0 && dataResposta == '1') || (event.deltaX < 0 && dataResposta == '0')) {
+      	var playPromise = acertou.play();
+      	resposta.classList.add('certo');
+      } else {
+      	var playPromise = errou.play();
+      	resposta.classList.add('errado');
+      }
+      setTimeout(function () {
+      	acaoContinuar();
+      }, 2000);
+      
+    }
+  });
+});
+
+function createButtonListener(love) {
+  return function (event) {
+    var cards = document.querySelectorAll('.tinder--card:not(.removed)');
+    var moveOutWidth = document.body.clientWidth * 1.5;
+
+    if (!cards.length) return false;
+
+    var card = cards[0];
+    var dataResposta = card.attributes['data-resposta'].value;
+
+    card.classList.add('removed');
+
+    if (love) {
+      card.style.transform = 'translate(' + moveOutWidth + 'px, -100px) rotate(-30deg)';
+    } else {
+      card.style.transform = 'translate(-' + moveOutWidth + 'px, -100px) rotate(30deg)';
+    }
+
+		if ((love && dataResposta == '1') || (!love && dataResposta == '0')) {
+			var playPromise = acertou.play();
+			resposta.classList.add('certo');
+      acertos++;
+		} else {
+			var playPromise = errou.play();
+			resposta.classList.add('errado');
+		}
+		setTimeout(function () {
+		    	acaoContinuar();
+		    }, 2000);
+		  event.preventDefault();
+		};
+}
+function acaoContinuar() {
+	tinderContainer.classList.remove('tinder_love');
+	tinderContainer.classList.remove('tinder_nope');
+	resposta.classList.remove('certo');
+	resposta.classList.remove('errado');
+	initCards();
+	
+}
+
+
+var nopeListener = createButtonListener(false);
+var loveListener = createButtonListener(true);
+
+love.addEventListener('click', loveListener);
+nope.addEventListener('click', nopeListener);
+
+</script>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>final completo minidev</title>
+	<link rel="preconnect" href="https://fonts.gstatic.com">
+	<link href="https://fonts.googleapis.com/css2?family=Nunito&display=swap" rel="stylesheet">
+	<script src="assets/jquery.min.js"></script>
+	
+</head>
+<body>
+<style>
+div{
+	opacity: 0;
+	transition: opacity 1s;
+	width: 166px;
+	margin: 0 auto;
+	margin-top: 30px;
+}
+.anima div{
+	opacity: 1;
+}
+</style>
+
+<div>
+	<img src="assets/img/logo-sp.png" alt="">
+	<img src="assets/img/logo-vai.png" alt="">
+	<img src="assets/img/logo-maismeninas.png" alt="">
+	<img src="assets/img/logo-minidev.png" alt="">
+</div>
+
+</body>
+</html>
+<script>
+
+$(function() {
+
+$('body').addClass('anima');
+setTimeout(function(){ window.location.href = 'chat.html'; }, 2000);
+
+
+});
+</script>

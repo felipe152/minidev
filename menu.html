@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>minidev</title>
+	<link rel="manifest" href="manifest.json">
+	<link rel="stylesheet" href="assets/font/style.css">
+	<link rel="stylesheet" href="assets/geral.css?axa=2323">
+	<link rel="stylesheet" href="assets/css/menu.css?axa=2323dd">
+	<link rel="stylesheet" href="assets/chat.css?axa=2323">
+	<link rel="stylesheet" href="assets/fase1.css?aaaaxxzzoipzzzz">
+	<link rel="stylesheet" href="assets/fase2.css?opo">
+	<link rel="stylesheet" href="assets/fase3.css?hjh">
+	<link rel="stylesheet" href="assets/fase4.css?hjh">
+	<link rel="stylesheet" href="assets/fase-corpo.css?hjh">
+	<link rel="preconnect" href="https://fonts.gstatic.com">
+	<link href="https://fonts.googleapis.com/css2?family=Nunito&display=swap" rel="stylesheet">
+	<script src="assets/jquery.min.js"></script>
+	<script src="assets/js/geral.js"></script>
+</head>
+
+<body>	
+	<section class="flex flexcolumn">
+
+		<div class="center">
+			<img src="assets/img/menu.png" id="imgTituloMenu" style="" alt="">
+		</div>
+
+		<div class="flexwrap appwrap">
+			<div class="col6">
+			  <a href="chat.html" id="btnchat" class="btna btnaRoxo flex flexcolumn flexjustify-center">
+			    <span class="icon-msg"></span>
+			  </a>
+			</div>
+
+			<div class="col6">
+			  <a href="quiz.html" id="btnquiz" class="btna btnaVerdeLimao flex flexcolumn flexjustify-center">
+			    <span class="icon-check"></span>
+			  </a>
+			</div>
+
+			<div class="col6">
+			  <a href="puzzle.html" id="btnpuzzle" class="btna btnaLaranja flex flexcolumn flexjustify-center">
+			    <span class="icon-wifi"></span>
+			  </a>
+			</div>
+			<div class="col6">
+
+			  <a href="identify.html" id="btnidentify" class="btna btnaAzulTurquesa flex flexcolumn flexjustify-center">
+
+			    <span class="icon-monitor"></span>
+
+			  </a>
+
+			</div>
+
+			<div class="col6">
+			  <a href="cards.html" id="btntinder" class="btna btnaRose flex flexcolumn flexjustify-center">
+			    <span class="icon-cards"><span class="path1"></span><span class="path2"></span></span>
+			  </a>
+			</div>		
+
+			<div class="col6">
+			  <a href="corpo.html" id="btncorpo" class="btna btnaLilas flex flexcolumn flexjustify-center">
+			    <span class="icon-woman"></span>
+			  </a>
+			</div>
+
+			<div class="col6">
+			  <a href="site.html" id="btnsite" class="btna btnaAzulLavanda flex flexcolumn flexjustify-center">
+			    <span class="icon-quiz"></span>
+			  </a>
+			</div>
+
+			<div class="col6">
+			  <a href="site-custom.html" id="btnsitecuston" class="btna btnaAzulRoyal flex flexcolumn flexjustify-center">
+			    <span class="icon-quiz"></span>
+			  </a>
+			</div>
+
+		</div>
+	</section>
+	<div class="newwindow"></div>
+
+</body>
+
+</html>
+
+<script>
+
+
+
+
+
+class Classmenu {
+
+
+
+	static urlParams = new URLSearchParams(window.location.search);
+
+	static step = this.urlParams.has('step') ? urlParams.get('step') : 0;
+
+	static msgareabkp = '';
+
+
+
+    static _initialize() {
+        const aClasse = this;
+        var h = window.innerHeight;
+		$('body').height(h).addClass('read');
+		$('body > section').height(h);
+		$('.btna').each(function(index, el) {
+			$(el).click(function(e) {
+				e.preventDefault();
+				let url = $(this).attr('href');
+				$(this).find('.notifywrap').remove();
+				aClasse.openWindow(url);
+			});
+		});
+		$('body').addClass('read');
+		setTimeout(() => {
+			this.doStep();
+		}, 1000)	
+    }
+
+    static setStep = function(step){
+
+    	//if(step>this.step){
+    		this.step = step;
+    	//}
+
+    }
+
+    static doStep = function(){
+    	switch (true) {
+
+			case (this.step==0):
+
+			  	$('#btnchat').addClass('new');
+
+				setTimeout(() => {
+
+				  $('#btnchat').append(this.creatNotify(1));
+
+				  $('#btnchat .notifywrap').menujump(500,5,999);
+
+				}, 1500)
+
+				this.setStep(1);
+
+		  	break;
+
+			case (this.step==20):
+
+			  	$('#btnquiz').addClass('new');
+
+				this.setStep(21);
+
+			break;
+
+			case (this.step==22):
+			  	$('#btnchat').append(this.creatNotify(1));
+				$('#btnchat .notifywrap').menujump(500,5,999);
+			break;
+
+			case (this.step==30):
+				$('#btnchat').append(this.creatNotify(1));
+				$('#btnchat .notifywrap').menujump(500,5,999);
+				this.setStep(31);
+
+			break;
+
+		  	case (this.step==32):
+
+			  	$('#btnpuzzle').addClass('new');
+
+				this.setStep(33);
+
+			break;
+
+		  	case (this.step==40):
+				$('#btnchat').append(this.creatNotify(1));
+				$('#btnchat .notifywrap').menujump(500,5,999);
+				this.setStep(41);
+
+			break;
+
+		  	case (this.step==42):
+			  	$('#btnidentify').addClass('new');
+				this.setStep(43);
+			break;
+
+			case (this.step==44):
+			  	$('#btnchat').append(this.creatNotify(1));
+				$('#btnchat .notifywrap').menujump(500,5,999);
+			break;
+
+		  	case (this.step==50):
+				$('#btnchat').append(this.creatNotify(1));
+				$('#btnchat .notifywrap').menujump(500,5,999);
+				this.setStep(51);
+
+			break;
+
+		  	case (this.step==52):
+			  	$('#btntinder').addClass('new');
+				this.setStep(53);
+			break;
+
+			case (this.step==54):
+			  	$('#btnchat').append(this.creatNotify(1));
+				$('#btnchat .notifywrap').menujump(500,5,999);
+			break;
+
+		  	case (this.step==60):
+				$('#btnchat').append(this.creatNotify(1));
+				$('#btnchat .notifywrap').menujump(500,5,999);
+				this.setStep(61);
+			break;
+
+		  	case (this.step==62):
+			  	$('#btncorpo').addClass('new');
+				this.setStep(63);
+			break;
+
+			case (this.step==70):
+				$('#btnchat').append(this.creatNotify(1));
+				$('#btnchat .notifywrap').menujump(500,5,999);
+				this.setStep(71);
+			break;
+
+			case (this.step==72):
+				$('#btnsite').addClass('new');
+				this.setStep(73);
+			break;
+
+			case (this.step==80):
+				$('#btnchat').append(this.creatNotify(1));
+				$('#btnchat .notifywrap').menujump(500,5,999);
+				this.setStep(81);
+			break;
+
+			case (this.step==82):
+				$('#btnsitecuston').addClass('new');
+				this.setStep(83);
+			break;
+
+			case (this.step==84):
+				window.location.href = 'final-completo.html';
+			break;
+
+			default: break;
+
+		}
+
+		
+
+    };
+
+
+
+    static creatNotify = function(counter){
+
+    	return '<span class="notifywrap"><span class="notify">'+counter+'</span></span>';
+    };
+
+
+
+    static chatBkp = function(){
+
+    	this.msgareabkp = $('#msgarea').html();
+    };
+
+
+
+    static setChatBkp = function(){
+
+    	$('#msgarea').html(this.msgareabkp);
+    };
+
+
+
+    static openWindow = function(url){
+
+    	$( ".newwindow" ).load( url, function() {
+			$( this ).addClass('open');
+		});
+
+    };
+
+
+
+    static closeWindow = function(){
+    	$( ".newwindow" ).removeClass('open');
+    	setTimeout(function () {
+      		$( ".newwindow" ).html(' ');
+      	}, 1100);
+    };
+
+}
+
+$(function() {
+	Classmenu._initialize();
+});
+
+
+
+
+
+
+
+</script>

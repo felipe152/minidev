@@ -1,0 +1,673 @@
+<script src="assets/draganddrop.js"></script>
+
+<script src="assets/dom-to-image.js"></script>
+
+<script src="cordova.js"></script>
+
+
+
+<section id="site-custom">
+
+	<div class="header-app azul-royal white-text">
+
+		<div></div>
+
+		<div>Seu Site</div>
+
+		<div><span class="icon-quiz"></span></div>
+
+	</div>
+
+	<section id="pagina1" class="pag">	
+
+		<h2>Construa o site da Minidev</h2>
+
+		<div id="site-mini" class="site">
+
+			<div><img width="60" src="assets/img/logo-peq.png" alt="logo"></div>
+
+			<div class="hidden-block h1 piecezone"></div>
+
+			<div class="hidden-block h2 piecezone2"></div>
+
+			<div class="sides">
+
+				<div class="stripes">🤟Hello world! Esse é o meu site desenvolvido no jogo Minidev ❤️ Eu aprendi um montão de coisas legais sobre programação, computadores e tecnologia. 💻🎉 Olha só o meu site agora e me conta o que achou? Beijos 😘</div>
+
+				<div class="img piecezone3"></div>
+
+			</div>
+
+			<div class="footer">
+
+				<div class="hidden-block icon"><img class="piecezone3" src="assets/img/icones/tiktok.png" width="100%"></div>
+
+				<div class="hidden-block icon"><img class="piecezone3" src="assets/img/icones/instagram.png" width="100%"></div>
+
+				<div class="hidden-block icon"><img class="piecezone3" src="assets/img/icones/whatsapp.png" width="100%"></div>
+
+			</div>
+
+		</div>
+
+	</section>
+
+	<div class="footerpainel exer1">
+
+		<h2>Escreva o título</h2>
+
+		<div class="options-wrap">
+
+			<a href="#" class="dragdrop" data-resposta="1">h1</a>
+
+			<!--<a href="#" class="dragdrop" data-resposta="0">img</a>-->
+
+			<a href="#" class="dragdrop" data-resposta="0">h2</a>
+
+			<!--<a href="#" class="dragdrop" data-resposta="0">p</a>-->
+
+		</div>
+
+	</div>
+
+	<div class="footerpainel exer2">
+
+		<h2>Escreva o sub-título</h2>
+
+		<div class="options-wrap">
+
+			<!--<a href="#" class="dragdrop2" data-resposta="0">img</a>-->
+
+			<a href="#" class="dragdrop2" data-resposta="0">h1</a>
+
+			<a href="#" class="dragdrop2" data-resposta="1">h2</a>
+
+			<!--<a href="#" class="dragdrop2" data-resposta="0">p</a>-->
+
+		</div>
+
+	</div>
+
+	<div class="footerpainel exer3">
+
+		<h2>Escolha um imagem do seu celular ou tire uma selfie agora!</h2>
+
+		<input type="file" accept="image/*" capture="capture" value="" style="display:none;" id="exer3file">
+
+		<button class="btna" id="exer3filelink">Sim, eu quero</button>
+
+	</div>
+
+	<div class="footerpainel exer4">
+
+		<h2>Arraste as animações para a sua imagem</h2>
+
+		<div class="images-wrap">
+
+			<div class="dragdrop3" data-efeito="jump"><span></span></div>
+
+			<div class="dragdrop3" data-efeito="shake"><span></span></div>
+
+			<div class="dragdrop3" data-efeito="fade"><span></span></div>
+
+		</div>
+
+		<button class="btna">Finalizar</button>
+
+	</div>
+
+	<div class="painelResposta"><button class="btna">Continuar</button></div>
+
+</section>
+
+<script>
+
+var exer = '';
+
+var acertou = new Audio('assets/sound/acertou.wav');
+
+var errou = new Audio('assets/sound/errou.wav');
+
+var peca = new Audio('assets/sound/peca.wav');
+
+$(function() {
+
+	
+
+	setTimeout(initExer1(),1000);
+
+	$('.painelResposta button').click(function (e) {
+
+		e.preventDefault();
+
+		$('.painelResposta').removeClass('certo');
+
+			setTimeout(function(){
+
+				switch (exer){
+
+					case 'exer1':
+
+					    initExer2();
+
+					    break;
+
+					case 'exer2':
+
+					    initExer3();
+
+					    break;
+
+					case 'exer3':
+
+					    initExer4();
+
+					    break;
+
+					case 'exer4':
+
+					   setTimeout(function(){
+
+							final();
+							
+							Classmenu.setStep(84);
+							Classmenu.closeWindow();
+							setTimeout(function(){
+								window.location = 'final.html?step=3';
+							},500);
+
+						},600);
+
+					   break;
+
+				}
+
+			},600);
+
+	});
+
+});
+
+
+
+function initExer1(){
+
+	exer = 'exer1';
+
+	$('.footerpainel.exer1').addClass('ativo');	
+
+	$('.site').addClass('zoom');
+
+	$('.dragdrop').draggable({
+
+		revert: true,
+
+		placeholder: true,
+
+		droptarget:  '.piecezone',
+
+		drop: function(evt, droptarget) {
+
+			var pos = $(this).attr('data-resposta');
+
+			if (pos == 1) {
+
+				var playPromise = peca.play();
+
+		  		$('.hidden-block.h1').html('<div>&lt;h1&gt;</div><div><input type="text" id="exer1h1"></div><div>&lt;/h1&gt;</div>');
+
+		  		$('.footerpainel.exer1').removeClass('ativo');
+
+		  		$('#exer1h1').on('keypress blur',function(event){
+
+		  			if(event.type == 'keypress'){
+
+		  				var keycode = (event.keyCode ? event.keyCode : event.which);
+
+		  				if(keycode != '13'){
+
+		  					return;
+
+		  				}
+
+		  			}
+
+			    	if ($('#exer1h1').val() != '') {
+
+				    	var playPromise = acertou.play();
+
+				    	if(event.type != 'blur'){
+
+				    		$('#exer1h1').blur();
+
+				    	}
+
+				    	$('.hidden-block.h1 div').eq(0).hide();
+
+				    	$('.hidden-block.h1 div').eq(2).hide();
+
+						setTimeout(function(){
+
+							$('.painelResposta').addClass('certo');
+
+							var playPromise = acertou.play();
+
+						},600);
+
+					} else{
+
+						var playPromise = errou.play();
+
+			    		$('#exer1h1').focus();
+
+					}
+
+				});
+
+				setTimeout(function(){
+
+					var playPromise = acertou.play();
+
+					$('#exer1h1').focus();
+
+				},600);
+
+				return;
+
+			} else{
+
+				$(this).shake(100,10,3);
+
+				var playPromise = errou.play();
+
+			}
+
+		}
+
+	});
+
+}
+
+function initExer2(){
+
+	exer = 'exer2';
+
+	$('.footerpainel.exer2').addClass('ativo');	
+
+	$('.site').addClass('zoom2x');
+
+	$('.dragdrop2').draggable({
+
+		revert: true,
+
+		placeholder: true,
+
+		droptarget:  '.piecezone2',
+
+		drop: function(evt, droptarget) {
+
+			var pos = $(this).attr('data-resposta');
+
+			if (pos == 1) {
+
+				var playPromise = peca.play();
+
+		  		$('.hidden-block.h2').html('<div>&lt;h2&gt;</div><div><input type="text" id="exer2h2"></div><div>&lt;/h2&gt;</div>');
+
+		  		$('.footerpainel.exer2').removeClass('ativo');
+
+		  		$('#exer2h2').on('keypress blur',function(event){
+
+				   if(event.type == 'keypress'){
+
+		  				var keycode = (event.keyCode ? event.keyCode : event.which);
+
+		  				if(keycode != '13'){
+
+		  					return;
+
+		  				}
+
+		  			}
+
+			    	if ($('#exer2h2').val() != '') {
+
+				    	var playPromise = acertou.play();
+
+				    	if(event.type != 'blur'){
+
+				    		$('#exer2h2').blur();
+
+				    	}
+
+				    	$('.hidden-block.h2 div').eq(0).hide();
+
+				    	$('.hidden-block.h2 div').eq(2).hide();
+
+						setTimeout(function(){
+
+							$('.painelResposta').addClass('certo');
+
+							var playPromise = acertou.play();
+
+						},600);
+
+			    	} else {
+
+			    		var playPromise = errou.play();
+
+			    		$('#exer2h2').focus();
+
+			    	}
+
+				    
+
+				});
+
+				setTimeout(function(){
+
+					var playPromise = acertou.play();
+
+					$('#exer2h2').focus();
+
+				},600);
+
+				return;
+
+			} else{
+
+				$(this).shake(100,10,3);
+
+				var playPromise = errou.play();
+
+			}
+
+		}
+
+	});
+
+}
+
+function initExer3(){
+
+	exer = 'exer3';
+
+	$('.site').addClass('zoom zoom3x');
+
+	$('.footerpainel.exer3').addClass('ativo');
+
+	$('#exer3filelink').click(function (e) {
+
+		e.preventDefault();
+
+		$('#exer3file').click();
+
+	});
+
+	$('#exer3file').change(function (e) {
+
+		e.preventDefault();
+
+		var arquivos = this.files;
+
+		if (!arquivos[0]) {
+
+			alert("Please select a file before clicking 'Load'");               
+
+		} else {
+
+			var file = arquivos[0];
+
+			var fr = new FileReader();
+
+			fr.onloadend = function () {
+
+				$('.footerpainel.exer3').removeClass('ativo');
+
+				var img = new Image();
+
+	        	img.crossOrigin = 'Anonymous';
+
+	        	img.src = fr.result;
+
+    			$('.img').append(img)
+
+    			$('.img img').show();
+
+    			var playPromise = acertou.play();
+
+    			$('.painelResposta').addClass('certo');
+
+  			}
+
+			fr.readAsDataURL(file);
+
+		}
+
+	});
+
+}
+
+function initExer4(){
+
+	exer = 'exer4';
+
+
+
+	$('.site').addClass('zoom zoom4x');
+
+	$('.footerpainel.exer4').addClass('ativo');
+
+	$('.footerpainel.exer4 .dragdrop3').draggable({
+
+		revert: true,
+
+		placeholder: true,
+
+		droptarget:  '.piecezone3',
+
+		drop: function(evt, droptarget) {
+
+			var efeito = $(this).attr('data-efeito');
+
+			switch (efeito) {
+
+				case 'jump':
+
+					$(droptarget).jump(500,10,999);
+
+				break;
+
+				case 'shake':
+
+					$(droptarget).shake(200,5,999);
+
+				break;
+
+				case 'fade':
+
+					$(droptarget).fadeInOut(1000,999);
+
+				break;
+
+			}
+
+		}
+
+	});
+
+	$('.footerpainel.exer4 .dragdrop3 span').eq(0).jump(500,10,999);
+
+	$('.footerpainel.exer4 .dragdrop3 span').eq(1).shake(500,5,999);
+
+	$('.footerpainel.exer4 .dragdrop3 span').eq(2).fadeInOut(1000,999);
+
+
+
+	$('.footerpainel.exer4 .btna').click(function (e) {
+
+		e.preventDefault();
+
+		$('.footerpainel.exer4').removeClass('ativo');
+
+			setTimeout(function(){
+
+				$('painelResposta button').html('Baixar site ⬇')
+
+				$('.painelResposta').addClass('certo');
+
+				var playPromise = acertou.play();
+
+				$('.site').removeClass('zoom zoom2x zoom3x zoom4x');
+
+			},600);
+
+	});
+
+}
+
+
+
+function final(){
+
+	
+
+	var node = document.getElementById('site-mini');
+
+	domtoimage.toPng(node)
+
+		.then(function (dataUrl) {
+
+			if (typeof window.cordova === "undefined"){ //Browser
+
+				var img = new Image();
+
+				img.crossOrigin = 'Anonymous';
+
+				img.src = dataUrl;
+
+				img.id = 'imgsite';
+
+				document.body.appendChild(img);  
+
+				var tmpLink = document.createElement( 'a' );  
+
+				tmpLink.download = 'site-minidev.png';
+
+				tmpLink.href = dataUrl;  
+
+				document.body.appendChild( tmpLink );  
+
+				tmpLink.click();  
+
+				document.body.removeChild( tmpLink );
+
+			} else {
+
+				var myBaseString = dataUrl;
+
+				var block = myBaseString.split(";");
+
+				var block = myBaseString.split(";");
+
+				var dataType = block[0].split(":")[1];
+
+				var realData = block[1].split(",")[1];
+
+				var folderpath = "file:///storage/emulated/0/Download/";
+
+				var filename = "minidev.png";
+
+				savebase64AsImageFile(folderpath,filename,realData,dataType);
+
+			}
+
+	})
+
+	.catch(function (error) {
+
+		console.error('oops, something went wrong!', error);
+
+	});
+
+}
+
+
+
+
+
+function b64toBlob(b64Data, contentType, sliceSize) {
+
+	contentType = contentType || '';
+
+	sliceSize = sliceSize || 512;
+
+
+
+	var byteCharacters = atob(b64Data);
+
+	var byteArrays = [];
+
+
+
+	for (var offset = 0; offset < byteCharacters.length; offset += sliceSize) {
+
+	    var slice = byteCharacters.slice(offset, offset + sliceSize);
+
+	    var byteNumbers = new Array(slice.length);
+
+	    for (var i = 0; i < slice.length; i++) {
+
+	        byteNumbers[i] = slice.charCodeAt(i);
+
+	    }
+
+	    var byteArray = new Uint8Array(byteNumbers);
+
+	    byteArrays.push(byteArray);
+
+	}
+
+
+
+	var blob = new Blob(byteArrays, {type: contentType});
+
+	return blob;
+
+}
+
+function savebase64AsImageFile(folderpath,filename,content,contentType){
+
+    var DataBlob = b64toBlob(content,contentType);    
+
+    window.resolveLocalFileSystemURL(folderpath, function(dir) {
+
+		dir.getFile(filename, {create:true}, function(file) {
+
+            file.createWriter(function(fileWriter) {
+
+                fileWriter.write(DataBlob);
+
+                alert('O seu site foi salvo e já pode ser compartilhado!');
+
+      
+
+            }, function(){
+
+                alert('Unable to save file in path '+ folderpath);
+
+            });
+
+		},function(e){console.log(e)});
+
+    });
+
+}
+
+
+
+
+
+
+
+</script>

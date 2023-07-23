@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Chat minidev</title>
+	<link rel="stylesheet" href="assets/chat.css">
+	<link rel="preconnect" href="https://fonts.gstatic.com">
+	<link href="https://fonts.googleapis.com/css2?family=Nunito&display=swap" rel="stylesheet">
+	<script src="assets/jquery.min.js"></script>
+</head>
+<body>
+
+<div id="chatarea">
+	<img src="assets/img/minidev-avatar.png" alt="">
+	<ul id="msgarea">
+		<li>Oi, amiga! 💜💜</li>
+		<li>Eu vou te apresentar o mundo da tecnologia 💻</li>
+		<li>Sou a Minidev e tenho 10 anos! E você?</li>
+		<li>Escreve aí 👇🏿</li>
+	</ul>
+</div>
+<div id="textarea">
+	<input name="newmessage" id="newmessage" type="text" value="">
+	<a id="sendmessage" href="#"></a>
+</div>
+<a href="#" id="btnvamos"></a>
+</body>
+</html>
+<script>
+$(function() {
+	var h = window.innerHeight;
+	$('body').height(h);
+	var interval;
+	var step = 0;
+	$('#chatarea img').css('opacity', '1');
+		interval = setInterval(function(){
+		switch(step ){
+			case 0:
+			case 1:
+			case 2:
+				$('#msgarea li').eq(step).show(500);
+				step++
+			break;
+			case 3:
+				$('#msgarea li').eq(step).show(500);
+				$('#textarea').show();
+				$('#textarea').css('opacity', '1');
+				step++
+			break;
+			case 5:
+				var txt = 'Agora que já sei o seu nome...'
+				$('#msgarea').append('<li>'+txt+'</li>');
+				$('#msgarea li').last().show(500);
+				step++
+			break;
+			case 6:
+				var txt = 'Vamos jogar? 😁'
+				$('#msgarea').append('<li>'+txt+'</li>');
+				$('#msgarea li').last().show(500);
+				$('#btnvamos').show();
+				$('#btnvamos').css('opacity', '1');
+				step++
+			break;
+		}
+	},2000);
+	$('#sendmessage').click(function(event) {
+		var txt = $('#newmessage').val();
+		$('#newmessage').val('');
+		$('#msgarea').append('<li class="msguser">'+txt+'</li>');
+
+		$('.msguser').last().html(txt);
+		$('.msguser').last().show(500);
+		$('#textarea').css('opacity', '0');
+		step++
+	});
+	$("#newmessage").keydown(function (e) {
+		if (e.keyCode == 13) {
+			$('#sendmessage').click();
+		}
+	});
+	$('#btnvamos').click(function(event) {
+		window.location.href = 'fase1.html';
+	});
+});
+</script>

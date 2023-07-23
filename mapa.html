@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mapa</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito&display=swap" rel="stylesheet">
+    <script src="assets/jquery.min.js"></script>
+    
+</head>
+<body>
+<style>
+body{
+  position: relative;
+  overflow: hidden;
+  background-color: #ffcdf9;
+  margin: 0;
+  padding: 0;
+  height: auto;
+  width: 100vw;
+  max-height: 100vh;
+}
+img{
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: auto;
+  z-index: 0;
+}
+.mapaicone{
+  position: absolute;
+  top: 70%; left: 0;
+  margin: 0;
+  padding: 0;
+  height: auto;
+  width: 100vw;
+  z-index: 50; 
+}
+.mapa2{ top: 45%; z-index: 70; }
+.mapa3{ top: 20%; z-index: 80; }
+.mapa4{ top: 0; z-index: 100; }
+</style>
+<img src="assets/mapa.png" alt="">
+<img class="mapaicone mapa1" src="assets/icone-mapa1.png" alt="">
+<img class="mapaicone mapa2" src="assets/icone-mapa2.png" alt="">
+<img class="mapaicone mapa3" src="assets/icone-mapa3.png" alt="">
+<img class="mapaicone mapa4" src="assets/icone-mapa4.png" alt="">
+
+
+</body>
+</html>
+<script>
+
+$(function() {
+
+var queryString = window.location.search;
+urlParams = new URLSearchParams(queryString);
+
+if (urlParams.has('step')) {
+    if (urlParams.get('step')=='2') {
+        $('.mapa3').jump(500,10,999);
+        $('.mapa3').click(function (e) {e.preventDefault(); window.location.href = 'fase2.html';});
+    } else if(urlParams.get('step')=='3'){
+        $('.mapa2').jump(500,10,999);
+        $('.mapa2').click(function (e) {e.preventDefault(); window.location.href = 'fase3.html';});
+    } else if(urlParams.get('step')=='4'){
+        $('.mapa1').jump(500,10,999);
+        $('.mapa1').click(function (e) {e.preventDefault(); window.location.href = 'fase4.html';});
+    }
+} else {
+    $('.mapa4').jump(500,10,999);
+    $('.mapa4').click(function (e) {e.preventDefault(); window.location.href = 'fase1.html';});
+}
+
+});
+jQuery.fn.jump = function(interval,distance,times){
+   interval = typeof interval == "undefined" ? 100 : interval;
+   distance = typeof distance == "undefined" ? 10 : distance;
+   times = typeof times == "undefined" ? 999 : times;
+   var jTarget = $(this);
+   $(this).stop(true);
+   //jTarget.css('position','relative');
+   var inicial = parseInt(jTarget.css('top'), 10);
+   console.log(inicial);
+   jTarget.css('opacity',1);
+
+   jTarget.css('left',0);
+   for(var iter=0;iter<(times+1);iter++){
+      jTarget.animate({ top: (iter%2==0 ? (distance+inicial) : (inicial-distance))}, interval/2);
+   }
+   return jTarget.animate({ top: inicial},interval/2);
+}
+</script>

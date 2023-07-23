@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>final minidev</title>
+	<link rel="stylesheet" href="assets/geral.css?kkkj">
+	<link rel="stylesheet" href="assets/final.css?ff">
+	<link rel="preconnect" href="https://fonts.gstatic.com">
+	<link href="https://fonts.googleapis.com/css2?family=Nunito&display=swap" rel="stylesheet">
+	<script src="assets/jquery.min.js"></script>
+	<script src="cordova.js"></script>
+</head>
+<body>
+<div class="boxfinal">
+	<p>
+	<button class="btnvamos"></button>
+	<a href="#" target="_blank" class="btna btnaSuccess btnshare">Compartilhe seu site</a>
+	<!--
+	<a href="https://api.whatsapp.com/send" target="_blank" class="btnwhats"></a>
+	<a href="https://www.instagram.com/" target="_blank" class="btninsta"></a>
+	-->
+	<button class="btnfinal"></button>
+	</p>
+
+</div>
+</body>
+</html>
+<script>
+
+$(function() {
+	var queryString = window.location.search;
+	urlParams = new URLSearchParams(queryString);
+
+	var txt = {
+		0: [
+			'Você completou a fase 1! Vamos juntas para o próximo desafio?<br />',
+		],
+		1: [
+			'Você completou a fase 2! Vamos juntas para o próximo desafio?<br />',
+		],
+		2: [
+			'Você completou a fase 3! Vamos juntas para o próximo desafio?<br />',
+		],
+		3: [
+			'Você conseguiu concluir o desafio final! Quer compartilhar com as suas amigas nas redes sociais?<br />',
+		]
+	};
+	var dialogo = txt[0];
+	var stepchat = 1;
+	if (urlParams.has('step')) {
+		if (urlParams.get('step')=='1') {
+			stepchat = 3;
+			dialogo = txt[1];
+		} else if(urlParams.get('step')=='2'){
+			stepchat = 7;
+			dialogo = txt[2];
+		} else if(urlParams.get('step')=='3'){
+			$('body').addClass('final');
+			stepchat = 9;
+			dialogo = txt[3];
+		}
+	}
+	$('.boxfinal p').prepend(dialogo);
+
+
+	var audio = new Audio('assets/sound/final.wav');
+	var playPromise = audio.play();
+	var h = window.innerHeight-1;
+	$('body').height(h);
+	$('.boxfinal').addClass('anima');
+
+
+
+	$('.btnfinal').click(function(event) {
+		window.location.href = 'final-completo.html';
+	});
+	$('.btnshare').click(function(event) {
+		event.preventDefault();
+		if (typeof window.cordova !== "undefined"){ //Miobile
+			window.resolveLocalFileSystemURL('file:///storage/emulated/0/Download/minidev.png', function(){
+				var options = {
+			  		message: 'Veja o site que criei na MiniDev',
+			  		files: ['file:///storage/emulated/0/Download/minidev.png'],
+				};
+				window.plugins.socialsharing.shareWithOptions(options);
+			}, function(){
+				alert('Não foi possivel compartilhar ):');
+			});
+		} else {
+			if (navigator.share) {
+			    navigator.share({
+			        title: 'Veja o site que criei na MiniDev',
+			      });
+			  } else {
+			    console.log('Share not supported on this browser, do it the old way.');
+			  }
+		}
+	});
+		
+	
+
+});
+</script>

@@ -1,0 +1,325 @@
+<section id="chat">
+	<div class="header-app roxo white-text">
+		<div><img src="assets/img/minidev-avatar.png" width="30" alt=""></div>
+		<div>Minidev</div>
+		<div><span class="icon-msg"></span></div>
+	</div>
+	<div id="chatarea">
+		<img src="assets/img/minidev-avatar.png" alt="">
+		<ul id="msgarea"></ul>
+	</div>
+	<div id="textarea">
+		<input name="newmessage" id="newmessage" type="text" value="">
+		<a id="sendmessage" href="#"></a>
+	</div>
+
+	<button id="btnvamos" class="btn btna">Vamos!</button>
+	<button id="btnsim" class="btn btna">Sim!</button>
+	<button id="btnvamos2" class="btn btna">Vamos!</button>
+	<button id="btnvamos3" class="btn btna">Entendi!</button>
+	<button id="btnvamos4" class="btn btna">Quero!</button>
+	<button id="btn5" class="btn btna">Sei sim!</button>
+	<button id="btnvamos6" class="btn btna">Vamos!</button>
+	<button id="btnvamos7" class="btn btna">Vamos!</button>
+	<button id="btnvamos8" class="btn btna">Vamos!</button>
+	<button id="btnvamos9" class="btn btna">Finalizar</button>
+</section>
+
+<script>
+
+$(function() {
+	var h = window.innerHeight;
+	$('body').height(h);
+	var chat = new Audio('assets/sound/mesage.wav');
+
+	var interval;
+	var txt = {
+		0: [
+			'Oi, amiga! 💜💜',
+			'Eu vou te apresentar o mundo da tecnologia 💻',
+			'Sou a Minidev e tenho 10 anos! E você?',
+			'Escreve aí 👇🏿',
+			'[entrada]',
+			'Agora que já sei o seu nome...',
+			'Vamos começar? 😁',
+			'[btnvamos]',
+			'Vou te ensinar algumas coisas sobre tecnologia…',
+			'A internet é uma rede no mundo todo que liga pessoas, através de computadores 💻 e celulares 📱',
+			'para trocar de informações, ideias, fotos, mensagens e várias outras coisas 🌎 ',
+			'Por vários aparelhos, como: celular, tablet e computador.',
+			'Demais, né! Agora vamos ao primeiro desafio?',
+			'É um quiz super divertido com perguntas e respostas! 😄🎉',
+			'[btnsim]'
+		],
+		1: [
+			'Ah, poxa!😔 Parece que você não ganhou dessa vez o nosso quiz.',
+			'Eu sei que você tem potencial para arrasar na próxima tentativa!',
+			'Então, não desista!',
+			'Vamos jogar de novo? 💖',
+			'[btnsim]'
+		],
+		2: [
+			'Você completou a primeira fase do jogo Minidev! 🎉',
+			'Estou muito orgulhosa! 🥰',
+			'Vamos identificar um símbolo da internet',
+			'montando um quebra-cabeça no próximo aplicativo.',
+			'[btnvamos2]',
+		],
+		3: [
+			'Você completou mais uma fase do jogo Minidev! 🎉',
+			'Agora vamos identificar quais são os dispositivos com conexão à internet',
+			'No próximo desafio,',
+			'Olha só como funciona:',
+			'veja a imagem do dispositivo',
+			'e diga qual é o nome dele',
+			'ok? 👌',
+			'[btnvamos3]',
+		],
+		4: [
+			'Poxa, que pena que você não ganhou! Mas não desiste, tá?', 
+			'Vamos jogar de novo e mostrar que somos incríveis!',
+			'Tenho certeza que você vai ganhar! Tô torcendo por você! 🌟💖',
+			'[btnvamos3]',
+		],
+		5: [
+			'Você completou mais uma fase do jogo Minidev! 🎉',
+			'Agora vamos saber o que fazer na internet!👩🏿‍💻',
+			'No próximo desafio,',
+			'Olha só como funciona:',
+			'arrasta pro lado DIREITO se a resposta estiver CERTA, tá valendo o ✅.',
+			'Mas, se a resposta estiver ERRADA, aí você arrasta pro lado ESQUERDO com o ❌.',
+			'Beleza, amiga? 💞',
+			'[btnvamos4]',
+		],
+		6: [
+			'Poxa, que pena que você não ganhou! Mas não desiste, tá?', 
+			'Vamos jogar de novo e mostrar que somos incríveis!',
+			'Tenho certeza que você vai ganhar! Tô torcendo por você! 🌟💖',
+			'[btnsim]',
+		],
+		7: [
+			'Ei, você chegou até aqui!',
+			'Vamos falar sobre as tecnologias que dão vida aos sites? ',
+			'Vou te contar sobre o HTML, CSS e JS de um jeito bem legal e fácil de entender! 🌐💻',
+			'Essas tecnologias são tipo partes do nosso corpo! ',
+			'HTML é como o esqueleto, sabe? Ele dá a estrutura, como os ossinhos de um site. ',
+			'CSS é como a roupinha da gente, dá estilo, cor e faz tudo ficar lindo. ',
+			'E JS é como o cérebro, é ele que dá vida ao site, faz as coisas acontecerem e interagirem. ',
+			'Juntos, esses três formam um timaço que cria páginas incríveis na web! É tipo ter um corpo completo e cheio de habilidades! 💪🌟',
+			'Arrasta os ícones para ver as tecnologias HTML, CSS e JS em ação, e descobrir como elas trabalham juntas!',
+			'[btn5]',
+		],
+		8: [
+			'Parabéns! Você aprendeu sobre as 3 principais tecnologias da internet! Vamos para o próximo desafio?  💕',
+			'Agora que você aprendeu sobre as 3 principais tecnologias da internet, vou te ensinar mais sobre HTML, a primeira delas.',
+			'Olha só, o h1 é como o título principal de um livro, é grandão e chama bastante atenção.', 
+			'Já o h2 é tipo um subtítulo, um pouco menor, que fala sobre assuntos relacionados ao título. É como se eles ajudassem a organizar as informações!📚💡',
+			'Agora, forme o seu próprio h1 e h2!',
+			'E arraste a Minidev para o campo da imagem e escolha uma cor para o seu cabelo, bem CSS, lembra?😁',
+			'[btnvamos7]',
+		],
+		9: [
+			'Uau, amiga, você é demais! Arrasou! 🌟', 
+			'Agora vamos montar o nosso próprio site!', 
+			'Vamos escrever o título e subtítulo', 
+			'e vamos animar uma imagem do seu celular!', 
+			'Vamos ver a mágica acontecer! 💃🎉',
+			'[btnvamos8]',
+		],
+		10: [
+			'Isso aí, você finalizou os desafios!',
+			'Você pode ver o seu site salvo na galeria do celular',
+			'Espero que tenha se divertido!',
+			'Até mais!',
+			'[btnvamos9]',
+		]
+	};
+	
+		
+	if(Classmenu.msgareabkp != ''){
+		Classmenu.setChatBkp();
+		$("#msgarea").animate({ scrollTop: $("#msgarea").height() }, 100);
+	}
+	switch (Classmenu.step) {
+		case 1:
+			dialogo = txt[0];
+			Classmenu.setStep(20);
+		break;
+		case 22:
+			dialogo = txt[1];
+			Classmenu.setStep(21);
+		break;
+		case 31:
+			dialogo = txt[2];
+			Classmenu.setStep(32);
+		break;
+		case 41:
+			dialogo = txt[3];
+			Classmenu.setStep(42);
+		break;
+		case 44:
+			dialogo = txt[4];
+			Classmenu.setStep(43);
+		break;
+		case 51:
+			dialogo = txt[5];
+			Classmenu.setStep(52);
+		break;
+		case 54:
+			dialogo = txt[6];
+			Classmenu.setStep(53);
+		break;
+		case 61:
+			dialogo = txt[7];
+			Classmenu.setStep(62);
+		break;
+		case 71:
+			dialogo = txt[8];
+			Classmenu.setStep(72);
+		break;
+		case 81:
+			dialogo = txt[9];
+			Classmenu.setStep(82);
+		break;
+		case 85:
+			dialogo = txt[10];
+			Classmenu.setStep(86);
+		break;
+
+	}
+
+	$('#chatarea img').css('opacity', '1');
+	interval = setInterval(stepTxt,500); /*4000*/ 
+	var step = 0;
+	function stepTxt(){
+		if (dialogo[step]=='[entrada]') {
+			clearInterval(interval);
+			$('#textarea').show();
+			$('#textarea').css('opacity', '1');
+		} else if(dialogo[step]=='[btnvamos]') { 
+			clearInterval(interval);
+			$('#btnvamos').show();
+			$('#btnvamos').css('opacity', '1');
+		} else if(dialogo[step]=='[btnvamos2]') { 
+			clearInterval(interval);
+			$('#btnvamos2').show();
+			$('#btnvamos2').css('opacity', '1');
+		} else if(dialogo[step]=='[btnvamos3]') { 
+			clearInterval(interval);
+			$('#btnvamos3').show();
+			$('#btnvamos3').css('opacity', '1');
+		} else if(dialogo[step]=='[btnvamos4]') { 
+			clearInterval(interval);
+			$('#btnvamos4').show();
+			$('#btnvamos4').css('opacity', '1');
+		} else if(dialogo[step]=='[btn5]') { 
+			clearInterval(interval);
+			$('#btn5').show();
+			$('#btn5').css('opacity', '1');
+		} else if(dialogo[step]=='[btnvamos6]') { 
+			clearInterval(interval);
+			$('#btnvamos6').show();
+			$('#btnvamos6').css('opacity', '1');
+		} else if(dialogo[step]=='[btnvamos7]') { 
+			clearInterval(interval);
+			$('#btnvamos7').show();
+			$('#btnvamos7').css('opacity', '1');
+		} else if(dialogo[step]=='[btnvamos8]') { 
+			clearInterval(interval);
+			$('#btnvamos8').show();
+			$('#btnvamos8').css('opacity', '1');
+		} else if(dialogo[step]=='[btnvamos9]') { 
+			clearInterval(interval);
+			$('#btnvamos9').show();
+			$('#btnvamos9').css('opacity', '1');
+		}else if(dialogo[step]=='[btnsim]') { 
+			clearInterval(interval);
+			$('#btnsim').show();
+			$('#btnsim').css('opacity', '1');
+		}else {
+			if (typeof dialogo[step] !== 'undefined') {
+				$('#msgarea').append('<br /><li>'+dialogo[step]+'</li>');
+				setTimeout( function(){  
+					$('#msgarea li').last().addClass('show');
+					var playPromise = chat.play();
+					$("#msgarea").animate({ scrollTop: $("#msgarea")[0].scrollHeight }, 100);
+				},100); //500
+				step++
+			}
+		}
+	}
+	$('#sendmessage').click(function(event) {
+		var txtinput = $('#newmessage').val();
+		$('#newmessage').val('');
+		$('#msgarea').append('<br /><li class="msguser">'+txtinput+'</li>');
+		var playPromise = chat.play();
+		$('#msgarea li').last().addClass('show');
+		$('#textarea').hide();
+		step++
+		interval = setInterval(stepTxt,500);/*4000*/
+	});
+	$("#newmessage").keydown(function (e) {
+		if (e.keyCode == 13) {
+			$('#sendmessage').click();
+		}
+	});
+	$('#btnvamos').click(function(event) {
+		$('#msgarea').append('<br /><li class="msguser">Vamos!</li>');
+		var playPromise = chat.play();
+		$('#msgarea li').last().addClass('show');
+		$('#btnvamos').fadeOut('fast');
+		step++
+		interval = setInterval(stepTxt,500);/*4000*/
+	});
+	$('#btnvamos2').click(function(event) {
+		Classmenu.setStep(32);
+		Classmenu.chatBkp();
+		Classmenu.closeWindow();
+		Classmenu.doStep();
+	});
+	$('#btnvamos3').click(function(event) {
+		Classmenu.setStep(42);
+		Classmenu.chatBkp();
+		Classmenu.closeWindow();
+		Classmenu.doStep();
+	});
+	$('#btnvamos4').click(function(event) {
+		Classmenu.setStep(52);
+		Classmenu.chatBkp();
+		Classmenu.closeWindow();
+		Classmenu.doStep();
+	});
+	$('#btn5').click(function(event) {
+		Classmenu.setStep(62);
+		Classmenu.chatBkp();
+		Classmenu.closeWindow();
+		Classmenu.doStep();
+	});
+	$('#btnvamos6').click(function(event) {
+		Classmenu.setStep(62);
+		Classmenu.chatBkp();
+		Classmenu.closeWindow();
+		Classmenu.doStep();
+	});
+	$('#btnvamos7').click(function(event) {
+		Classmenu.setStep(72);
+		Classmenu.chatBkp();
+		Classmenu.closeWindow();
+		Classmenu.doStep();
+	});
+	$('#btnvamos8').click(function(event) {
+		Classmenu.setStep(82);
+		Classmenu.chatBkp();
+		Classmenu.closeWindow();
+		Classmenu.doStep();
+	});
+	$('#btnsim').click(function(event) {
+		Classmenu.chatBkp();
+		Classmenu.closeWindow();
+		setTimeout(function () {
+      		Classmenu.doStep();
+      	}, 1100);
+		
+	});
+});
+</script>

@@ -1,0 +1,59 @@
+body{
+	z-index: 1;
+	background: #82C7CA;
+	padding: 0;
+	position: relative;
+	font-family: 'Nunito', sans-serif;
+	font-size: 16px; 
+}
+#imgTituloMenu{
+	opacity: 0;
+	margin: 24px auto;
+	width: 80%; 
+	max-width: 330px;
+	transition: opacity 1s linear;
+}
+.read #imgTituloMenu{
+	opacity: 1;
+}
+
+.appwrap{
+	margin: 0 auto;	
+	width: 90%;
+	max-width: 360px;
+}
+.appwrap .btna{
+	transition: opacity 0.5s linear, scale 1s linear;
+	margin: 16px auto;
+    max-width: 101px;
+    height: 101px;
+    padding: 0;
+}
+.appwrap .btna:not(.fixed){
+	opacity: 0;
+	scale: 0.1;
+}
+body.read .appwrap .btna.new{
+	opacity: 1;
+	scale: 1;
+}
+.appwrap .btna span[class^="icon-"]{
+	font-size: 53px;
+}
+.newwindow{
+	position: absolute;
+	top: 0;left: 0;right: 0;bottom: 0;
+	z-index: 0;
+	display: block;
+	opacity: 0;
+	scale: 0.1;
+	transition: opacity 0.5s linear, scale 1s linear;
+	overflow: hidden;
+}
+.newwindow.open{
+	z-index: 100;
+	display: block;
+	opacity: 1;
+	scale: 1;
+	transition: opacity 1s linear, scale 0.5s linear;
+}

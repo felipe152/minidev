@@ -1,0 +1,114 @@
+body{
+	position: relative;
+	background: #BD74DF;
+	padding: 0;
+	padding-top: 1px;
+	margin: 0; 
+	position: relative;
+	font-family: 'Nunito', sans-serif;
+	font-size: 16px; 
+}
+.progressbar{
+	position: relative;
+	height: 12px;
+	background-color: #E6E6E6;
+	border-radius: 16px;
+	margin: 0 28px;
+	margin-top: 45px;
+}
+.progressbar span {
+	position: absolute;
+	z-index: 10;
+    top: -5px;
+	left: calc(25% - 17.5px);
+	display: block;
+	width: 35px;
+    height: 35px;
+	font-size: 17px;
+    top: -10px;
+    border-radius: 17px;
+	color: #AF5DD6;
+	line-height: 2;
+	text-align: center;
+	background: #FFD372;
+}
+.progressbar span:nth-child(2){ left: calc(50% - 17.5px);; }
+.progressbar span:nth-child(3){ left: calc(75% - 17.5px);; }
+.progressbar .progress {
+	position: absolute;
+	z-index: 5;
+	top: 0;
+	left: 0;
+	transition: width 1s ease-in-out;
+	width: 100%;
+	height: 12px;
+	border-radius: 16px;
+	background: #FFD372;
+}
+.boxfinal{
+	position: absolute;
+	background-image: url('final.png');
+	background-repeat: no-repeat;
+	background-size: auto;
+	background-position: center top;
+	width: 303px;
+	height: 395px;
+	margin: 0 auto;
+	top: 100vh;
+    left: 50%;
+	margin-left: -151px;
+	transition: top 1.5s cubic-bezier(0.760, -0.330, 0.340, 1.400);
+}
+.boxfinal p{
+	font-weight: 800;
+	font-size: 18px;
+	text-align: center;
+	color: #9A7CAA;
+	padding: 50% 35px 0 34px;
+	text-align: center;
+}
+.boxfinal.anima{
+	top: calc(50% - 197.5px);
+}
+.btnvamos, .btnfinal{
+	opacity: 0;
+	background-image: url('btnvamos.png');
+	background-color: transparent;
+	display: inline-block;
+	border: 0;
+	width: 144px;
+	height: 68px;
+	margin: 14px auto;
+	filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+	transition: opacity .5s linear 2s;
+}
+.btnfinal{
+	background-image: url('btnfinalizar.png');
+	margin-top: 70px;
+}
+body.final .btnvamos{ display: none; }
+body:not(.final) .anima .btnvamos{
+	opacity: 1;
+}
+body:not(.final) .btnfinal, body:not(.final) .btnwhats,body:not(.final) .btninsta{ display: none; }
+ .btnwhats, .btninsta{
+	opacity: 0;
+	background-color: transparent;
+	display: inline-block;
+	border: 0;
+	width: 61px;
+	height: 61px;
+	margin: 14px auto;
+	margin-bottom: 0;
+	filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+	transition: opacity .5s linear 2s;
+}
+body.final .boxfinal{ background-size: 100%; height: 488px; }
+
+.btnwhats{ background-image: url('btnwhats.png'); }
+.btninsta{ background-image: url('btninsta.png'); }
+body:not(.final) .btna{opacity: 0}
+.btna{ min-height: auto; }
+.anima .btnwhats, .anima .btninsta, .anima .btnfinal{ opacity: 1; }
+
+FTP@maismeninasnatecnologia20

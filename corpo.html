@@ -1,0 +1,101 @@
+<script src="assets/draganddrop.js"></script>
+
+<section id="corpo">
+
+	<div class="header-app lilas white-text">
+
+		<div></div>
+
+		<div>Corpo</div>
+
+		<div><span class="icon-woman"></span></div>
+
+	</div>
+
+	<section class="figura-central">	
+
+		<img class="img-linhas" src="assets/img/corpo/line.png">
+
+		<img class="img-cor" src="assets/img/corpo/cor.png">
+
+		<img class="img-anima" src="assets/img/corpo/anima.gif">
+
+	</section>
+
+	<div class="footerpainel escolhas">
+
+		<h2>Escolha e arraste a tecnologia para cima</h2>
+
+		<div class="images-wrap">
+
+			<div class="dragdrop" data-efeito="linhas"><img src="assets/img/icones/html.png" /></div>
+
+			<div class="dragdrop" data-efeito="cor"><img src="assets/img/icones/css.png" /></div>
+
+			<div class="dragdrop" data-efeito="anima"><img src="assets/img/icones/js.png" /></div>
+
+		</div>
+
+		<a class="btna" href="#">Finalizar</a>
+
+	</div>
+
+
+
+</section>
+
+<script>
+
+$(function() {
+
+	setTimeout(initCorpo,1000);
+
+	function initCorpo(){
+
+		$('.footerpainel.escolhas').addClass('ativo');
+
+		$('.footerpainel.escolhas .dragdrop').draggable({
+
+			revert: true,
+			placeholder: true,
+			droptarget:  '.figura-central',
+			drop: function(evt, droptarget) {
+
+				var efeito = $(this).attr('data-efeito');
+
+				$('.figura-central img').removeClass('ativo');
+
+				switch (efeito) {
+					case 'linhas':
+						$('.figura-central img.img-linhas').addClass('ativo');
+					break;
+
+					case 'cor':
+						$('.figura-central img.img-cor').addClass('ativo');
+					break;
+
+					case 'anima':
+						$('.figura-central img.img-anima').addClass('ativo');
+					break;
+				}
+
+			}
+
+		});
+		$('.footerpainel .btna').click(function(event) {
+			Classmenu.setStep(70);
+			Classmenu.closeWindow();
+			setTimeout(function () {
+	      		Classmenu.doStep();
+	      	}, 1100);
+		});
+
+	}
+
+
+
+});
+
+
+
+</script>

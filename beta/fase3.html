@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>fase 3 minidev</title>
+	<link rel="stylesheet" href="fase3.css">
+	<link rel="preconnect" href="https://fonts.gstatic.com">
+	<link href="https://fonts.googleapis.com/css2?family=Nunito&display=swap" rel="stylesheet">
+	<script src="assets/jquery.min.js"></script>
+</head>
+<body>
+
+<div class="progressbar">
+	<span>1</span>
+	<span>2</span>
+	<span>3</span>
+	<div class="progress"></div>
+</div>
+<div class="quiz ativo">
+	<h2>Pergunta</h2>
+	<img class="icone-pergunta" src="assets/icones/notebook.png" alt="">
+	<button class="alternativa" data-correta="1">Resposta A</button>
+	<button class="alternativa" data-correta="0">Resposta B</button>
+	<button class="alternativa" data-correta="0">Resposta C</button>
+	<button class="alternativa" data-correta="0">Resposta D</button>
+	<button class="validar">Verificar</button>
+	<div class="resposta"></div> 
+</div>
+<div class="quiz">
+	<h2>Pergunta 2</h2>
+	<img class="icone-pergunta" src="assets/icones/monitor.png" alt="">
+	<button class="alternativa" data-correta="0">Resposta 2A</button>
+	<button class="alternativa" data-correta="1">Resposta 2B</button>
+	<button class="alternativa" data-correta="0">Resposta 2C</button>
+	<button class="alternativa" data-correta="0">Resposta 2D</button>
+	<button class="validar">Verificar</button>
+	<div class="resposta"></div> 
+</div>
+<div class="quiz">
+	<h2>Pergunta 3</h2>
+	<img class="icone-pergunta" src="assets/icones/phone.png" alt="">
+	<button class="alternativa" data-correta="0">Resposta 2A</button>
+	<button class="alternativa" data-correta="0">Resposta 2B</button>
+	<button class="alternativa" data-correta="1">Resposta 2C</button>
+	<button class="alternativa" data-correta="0">Resposta 2D</button>
+	<button class="validar">Verificar</button>
+	<div class="resposta"></div> 
+</div>
+
+
+</body>
+</html>
+<script>
+$(function() {
+	var h = window.innerHeight-1;
+	var currentQuiz = 0;
+	$('body').height(h);
+	$('.quiz').height(h-40-$('.progressbar').outerHeight(true));
+
+	proxQuiz();
+
+	$('.alternativa').click(function(event) {
+		$('.quiz').eq(currentQuiz).find('.alternativa').removeClass('ativo');
+		$(this).addClass('ativo');
+		$('.quiz').eq(currentQuiz).find('.validar').css('opacity', '1');
+	});
+	$('.validar').click(function(event) {
+		var quiz = $('.quiz').eq(currentQuiz);
+		var resp = $(quiz).find('.ativo').attr('data-correta');
+		if (resp=='1') {
+			$(quiz).find('.resposta').addClass('certo').html('Muito bem!');
+		} else{
+			$(quiz).find('.resposta').addClass('errado').html('Não foi dessa vez!');
+		}
+		$(quiz).find('.validar').hide();
+
+		currentQuiz++;
+		setTimeout(function(){
+			proxQuiz();
+		}, 3000);
+		
+	});
+	function proxQuiz(){
+		var per = (currentQuiz+1)*25;
+		$('.progress').width(per+'%');
+		var quiz = $('.quiz').eq(currentQuiz);
+		if (currentQuiz>0) {
+			$('.quiz').eq(currentQuiz-1).css('opacity', '0');
+			$('.quiz').eq(currentQuiz-1).hide();
+		}
+		$(quiz).show();
+		$(quiz).css('opacity', '1');
+	}
+});
+</script>

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>final completo minidev</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito&display=swap" rel="stylesheet">
+    <script src="assets/jquery.min.js?ss"></script>
+    
+</head>
+<body>
+<style>
+body{
+    position: relative;
+    width: 100vw; height: 100vh;
+    margin: 0;
+}
+.logos{
+    opacity: 0;
+    transition: opacity 1s;
+    width: 166px;
+    margin: 0 auto;
+    padding-top: 30%;
+    text-align: center;
+}
+.anima.logos{
+    opacity: 1;
+}
+.intro{
+    z-index: 100;
+    opacity: 0;
+    transition: opacity 1s, transform 5s linear;
+    position: absolute;
+    top: 0; left: 0;
+    width: 100vw; height: 100vh;
+    background: url('assets/intro.png') no-repeat center;
+    background-size: auto 100%;
+}
+.anima.intro{
+    opacity: 1;
+    transform: scale(1.2);
+}
+</style>
+<div class="logos">
+    <img src="assets/img/logo-sp.png" alt="">
+    <img src="assets/img/logo-vai.png" alt="">
+    <img src="assets/img/logo-maismeninas.png" alt="">
+    <img src="assets/img/logo-minidev.png" alt="">
+</div>
+<div class="intro"></div>
+
+</body>
+</html>
+<script>
+
+$(function() {
+
+$('.logos').addClass('anima');
+setTimeout(function(){
+    $('.logos').removeClass('anima');
+    $('.intro').addClass('anima');
+
+    var audio = new Audio('assets/sound/keys.wav');
+    var playPromise = audio.play();
+}, 2000);
+setTimeout(function(){ window.location.href = 'menu.html'; }, 8000);
+
+
+});
+</script>

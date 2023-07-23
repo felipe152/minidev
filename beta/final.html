@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>final minidev</title>
+	<link rel="stylesheet" href="final.css">
+	<link rel="preconnect" href="https://fonts.gstatic.com">
+	<link href="https://fonts.googleapis.com/css2?family=Nunito&display=swap" rel="stylesheet">
+	<script src="assets/jquery.min.js"></script>
+</head>
+<body>
+
+<div class="progressbar">
+	<span>1</span>
+	<span>2</span>
+	<span>3</span>
+	<div class="progress"></div>
+</div>
+<div class="boxfinal">
+	<p>
+	Você conseguiu completar a etapa 1 para ser uma Minidev! Vamos juntas?<br />
+	<button class="btnvamos"></button>
+	</p>
+
+</div>
+
+
+</body>
+</html>
+<script>
+$(function() {
+	var h = window.innerHeight-1;
+	$('body').height(h);
+
+	$('.boxfinal').addClass('anima');
+	
+
+});
+</script>

@@ -1,0 +1,15 @@
+{
+  "name": "MiniDev",
+  "short_name": "MiniDev",
+  "theme_color": "#BD74DF",
+  "background_color": "#FFF",
+  "display": "standalone",
+  "start_url": "/",
+  "icons": [
+    {
+      "src": "assets/img/minidev-avatar.png",
+      "sizes": "72x72",
+      "type": "image/png"
+    }
+  ]
+}

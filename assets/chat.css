@@ -1,0 +1,112 @@
+#chat{
+	background: #82C7CA;
+	padding: 0;
+	margin: 0; 
+	position: relative;
+	height: 100vh;
+	font-family: 'Nunito', sans-serif;
+	font-size: 16px; 
+}
+#chatarea{
+	position: absolute;
+	bottom: 105px;
+	width: calc(100% - 50px);
+	margin: 0 25px;
+}
+#chatarea img{
+	opacity: 0;
+	transition: opacity 2s ease-in-out;
+	position: absolute;
+	bottom: 0;
+	left: 0;
+}
+#msgarea{
+	display: inline-block;
+    margin: 0;
+    margin-left: 50px;
+    padding: 0;
+    list-style: none;
+    width: auto;
+    overflow: auto;
+    max-height: 100vh;
+}
+#msgarea li{
+	display: inline-block;
+	overflow: hidden;
+	background-color: #FFF;
+	max-width: 66%;
+	max-height: 0px;
+	opacity: 0; 
+	margin: 0;
+	padding: 0;
+	border-radius: 25px;
+    border-bottom-left-radius: 6px;
+	color: #000;
+	transition: max-height .5s linear, opacity .5s linear; 
+}
+#msgarea li.msguser{
+	margin-left: 60px;
+	background: #BD74DF;
+	color: #FFF;
+	float: right;
+    border-radius: 25px;
+    border-bottom-right-radius: 6px;
+}
+#msgarea li.show, #msgarea li.msguser.show{
+	margin: 2px 0;
+	padding: 20px;
+	max-height: 999px;
+	opacity: 1 !important;
+}
+#textarea{
+	display: none;
+	opacity: 0;
+	transition: opacity 1s ease-in-out;
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	height: 85px;
+}
+#textarea input{
+	display: block;
+	margin: 25px;
+	height: 40px;
+	width: -webkit-fill-available;
+	padding: 5px 20px;
+	border: none;
+	outline: none;
+	border-radius: 30px;
+	background-color: rgba(255,255,255,0.5);
+}
+#textarea input:focus{
+	background-color: rgba(255,255,255,1);
+	font-weight: bold;
+}
+#textarea #sendmessage{
+	position: absolute;
+	top: 38px; 
+	right: 32px;
+	width: 24px;
+	height: 24px;
+	background-image: url('img/send.png');
+}
+.btn{
+	display: none;
+	opacity: 0;
+	transition: opacity 1s ease-in-out;
+	position: absolute;
+	bottom: 10px;
+    font-weight: bold;	
+    margin: 0 25px;
+}
+#btnvamos, #btnvamos2, #btnvamos3{
+	background: linear-gradient(360deg, #BD74DF 0%, #CF85F1 34.38%);
+	box-shadow: 0px 4px 0px 0px #A865C8;
+	color: #FFF;
+}
+#btnsim{
+	color: #000;
+	box-shadow: 0px 4px 0px 0px #D2B7DE;
+	background: linear-gradient(360deg, #E7DDEC -12.5%, #FFFFFF 50%);
+}
